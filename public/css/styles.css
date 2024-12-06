@@ -302,7 +302,7 @@ button {
   overflow-y: scroll;
   height: 100vh;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 20px;
+  scroll-padding-top: 10px;
 }
 .gallery img {
   width: 100%;
