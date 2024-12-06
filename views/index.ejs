@@ -17,14 +17,27 @@
 
 <body>
   <header>
-    <h1>Block HP</h1>
+
+    <div class="hamburger" id="hamburger">
+      <span class="hamburger-line" id="line-1"></span>
+      <span class="hamburger-line" id="line-2"></span>
+      <span class="hamburger-line" id="line-3"></span>
+    </div>
+
+    <h1>Upload</h1>
+
   </header>
   
+  <nav id="navBar">
+    <a href="/">Home</a>
+    <a href="/gallery">Gallery</a>
+  </nav>
+
+
   <main class="app">
     
 
     <div class="header">
-      <h2>Upload Images</h2>
       <div class="server-message"></div>
     </div>
 
@@ -192,8 +205,33 @@
         serverMessage.innerHTML = error
         serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
       });
-
     }
+
+
+    // Hamburger Menu Function
+
+    let navMenuShow = function () {
+      let navMenu = document.getElementById("navBar");
+      let lineOne = document.getElementById("line-1");
+      let lineTwo = document.getElementById("line-2");
+      let lineThree = document.getElementById("line-3");
+
+      if (navMenu.style.left === "0px") {
+        navMenu.style.left = "-180px";
+        // hamburger animation
+        lineOne.style.transform = "rotate(0deg)";
+        lineTwo.style.transform = "scale(1)";
+        lineThree.style.transform = "rotate(0deg)";
+      } else {
+        navMenu.style.left = "0";
+        lineOne.style.transform = "translateX(32px) translateY(1px) rotate(135deg)";
+        lineTwo.style.transform = "scale(0)";
+        lineThree.style.transform = "rotate(45deg)";
+      }
+    };
+
+  document.getElementById("hamburger").addEventListener("click", navMenuShow);
+
 
   </script>
   

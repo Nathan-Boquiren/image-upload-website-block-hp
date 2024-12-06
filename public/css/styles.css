@@ -7,17 +7,87 @@
 body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
   background-color: whitesmoke;
+  position: relative;
 }
 
 header {
   background-color: limegreen;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  height: 10vh;
+  height: 80px;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ================   NAV + HAMBURGER  ================*/
+
+.hamburger {
+  width: 32px;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 3px 25px 0 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: absolute;
+  left: 20px;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  border-radius: 100vmax;
+  transition: transform 0.3s ease;
+  
+}
+
+#line-1 {
+  transform-origin: 0% 50%;
+}
+#line-2 {
+  transform-origin: 50% 50%;
+}
+#line-3 {
+  transform-origin: 100% 50%;
+}
+
+
+#navBar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: limegreen;
+  height: 100vh;
+  width: 180px;
+  position: fixed;
+  top: 0;
+  left: -180px;
+  z-index: 100;
+  padding: 100px 40px;
+  transition: left 0.3s ease;
+}
+
+#navBar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: transform 0.1s ease;
+}
+
+#navBar a:active {
+  transform: scale(1.2);
 }
 
 button {
@@ -36,7 +106,7 @@ button {
 .app {
   max-width: 1224px;
   width: 92%;
-  margin: 20px auto;
+  margin: 90px auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -55,7 +125,7 @@ button {
 
 .header h2 {
   min-width: fit-content;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .header h3 {
@@ -213,4 +283,27 @@ button {
 .saved-div .span--hidden,
 .queued-div .span--hidden {
   visibility: hidden;
+}
+
+
+
+
+
+/* ================   GALLERY  PAGE   ================*/
+
+.gallery {
+  margin-top: 80px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  flex-direction: column;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: none;
+  border-radius: 10px;
 }

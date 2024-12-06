@@ -94,6 +94,20 @@ app.put("/delete", (req, res) => {
   }
 });
 
+app.get("/gallery", (req, res) => {
+  let images = [];
+  fs.readdir("./public/uploads/", (err, files) => {
+    if (!err) {
+      files.forEach((file) => {
+        images.push(file);
+      });
+      res.render("gallery", { images: images }); // Render gallery.ejs
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 // Run server
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
