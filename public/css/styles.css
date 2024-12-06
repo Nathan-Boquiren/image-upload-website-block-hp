@@ -8,6 +8,7 @@ body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
   background-color: whitesmoke;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 header {
@@ -297,8 +298,10 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
   flex-direction: column;
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
 }
 .gallery img {
   width: 100%;
@@ -306,7 +309,5 @@ button {
   object-fit: cover;
   border: none;
   border-radius: 10px;
-  position: sticky;
-  top: 0;
-  transition: top 0.3s ease;
+  scroll-snap-align: start;
 }
