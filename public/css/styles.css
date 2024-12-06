@@ -248,7 +248,7 @@ button {
 .queued-div .image {
   width: 150px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
   z-index: 10;
 }
@@ -261,7 +261,7 @@ button {
 .queued-div .image img {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .saved-div .image span,
@@ -302,7 +302,7 @@ button {
   overflow-y: scroll;
   height: 100vh;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 20px;
 }
 .gallery img {
   width: 100%;
