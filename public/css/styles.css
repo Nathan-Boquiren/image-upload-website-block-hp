@@ -306,4 +306,7 @@ button {
   object-fit: cover;
   border: none;
   border-radius: 10px;
+  position: sticky;
+  top: 0;
+  transition: top 0.3s ease;
 }
