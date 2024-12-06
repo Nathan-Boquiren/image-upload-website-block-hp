@@ -295,7 +295,7 @@ button {
 .gallery {
   margin-top: 80px;
   padding: 20px;
-  padding: 100px;
+  padding-top: 100px;
   display: flex;
   gap: 10px;
   flex-direction: column;
