@@ -261,6 +261,7 @@ button {
 .queued-div .image img {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 
 .saved-div .image span,
@@ -295,13 +296,13 @@ button {
 .gallery {
   margin-top: 80px;
   padding: 20px;
-  padding-top: 100px;
   display: flex;
   gap: 10px;
   flex-direction: column;
   overflow-y: scroll;
   height: 100vh;
   scroll-snap-type: y mandatory;
+  scroll-padding-top: 100px;
 }
 .gallery img {
   width: 100%;
