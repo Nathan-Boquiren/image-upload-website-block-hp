@@ -299,10 +299,10 @@ button {
   display: flex;
   gap: 10px;
   flex-direction: column;
-  /* overflow-y: scroll;
+  overflow-y: scroll;
   height: 100vh;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 10px; */
+  scroll-padding-top: 10px;
 }
 
 .gallery img {
@@ -311,5 +311,5 @@ button {
   object-fit: cover;
   border: none;
   border-radius: 10px;
-  /* scroll-snap-align: start; */
+  scroll-snap-align: start;
 }
