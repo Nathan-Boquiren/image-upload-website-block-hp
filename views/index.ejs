@@ -233,6 +233,38 @@
   document.getElementById("hamburger").addEventListener("click", navMenuShow);
 
 
+
+
+    // Scroll Snap
+    
+    const gallery = document.querySelector('.gallery');
+
+
+    gallery.addEventListener('scroll', () => {
+      const images = gallery.querySelectorAll('img');
+      let closestImage = null;
+      let closestDistance = Infinity;
+
+      images.forEach(image => {
+        const rect = image.getBoundingClientRect();
+        const distance = Math.abs(rect.top); // Distance from the top of the container
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestImage = image;
+        }
+      });
+
+      // Manually scroll to the closest image (with the 100px offset in mind)
+      if (closestImage) {
+        const offsetTop = closestImage.offsetTop - 100; // Offset for the header
+        gallery.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        });
+      }
+    });
+
   </script>
   
 </body>
