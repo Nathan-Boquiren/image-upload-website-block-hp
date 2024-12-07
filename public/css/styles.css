@@ -13,13 +13,13 @@ body {
 
 header {
   background-color: limegreen;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: white;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  height: 60px;
   padding: 0 20px;
   position: fixed;
   top: 0;
