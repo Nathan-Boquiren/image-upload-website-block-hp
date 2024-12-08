@@ -21,7 +21,7 @@
   </header>
 
 
-  <main>
+  <main class="gallery-page">
     <div class="gallery">
       <% if (images.length > 0) { %>
         <% images.forEach(image => { %>
@@ -30,7 +30,13 @@
       <% } else { %>
         <p>No images found.</p>
       <% } %>
+
+      <footer>
+        Proudly created by Nathan J. Boquiren :)
+      </footer>
     </div>
   </main>
+
+  
 </body>
 </html>
