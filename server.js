@@ -89,7 +89,7 @@ app.put("/delete", (req, res) => {
     deleteImages.forEach((image) => {
       unlinkFile("./public/uploads/" + image);
     });
-    res.statusMessage = "Succesfully deleted";
+    res.statusMessage = "Successfully deleted";
     res.status(200).end();
   }
 });

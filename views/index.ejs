@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,11 @@
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=upload" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=upload" />
 
   <title>Block HP</title>
 
@@ -27,7 +31,7 @@
     <h1>Upload</h1>
 
   </header>
-  
+
   <nav id="navBar">
     <a href="/">Home</a>
     <a href="/gallery">Gallery</a>
@@ -35,7 +39,7 @@
 
 
   <main class="app">
-    
+
 
     <div class="header">
       <div class="server-message"></div>
@@ -47,18 +51,18 @@
       <div class="input-div">
         <span class="upload-symbol">
           upload
-          </span>
+        </span>
         <p class="browse">Upload</p>
-        <input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg"/>
+        <input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" />
       </div>
 
       <form id="queued-form">
         <div class="queued-div"></div>
         <button class="upload-button" type="submit">Upload</button>
       </form>
-      
+
     </div>
-    
+
     <span class="line-break"></span>
 
     <form id="saved-form">
@@ -69,34 +73,34 @@
       <div class="saved-div"></div>
     </form>
 
-    
+
 
   </main>
 
   <script>
 
     let queuedImagesArray = [],
-    savedForm = document.querySelector("#saved-form"),
-    queuedForm = document.querySelector("#queued-form"),
-    savedDiv = document.querySelector('.saved-div'),
-    queuedDiv = document.querySelector('.queued-div'),
-    inputDiv = document.querySelector('.input-div'),
-    input = document.querySelector('.input-div input'),
-    serverMessage = document.querySelector('.server-message'),
-    savedImages = JSON.parse('<%-JSON.stringify(images)%>'),
-    deleteImages = [];
+      savedForm = document.querySelector("#saved-form"),
+      queuedForm = document.querySelector("#queued-form"),
+      savedDiv = document.querySelector('.saved-div'),
+      queuedDiv = document.querySelector('.queued-div'),
+      inputDiv = document.querySelector('.input-div'),
+      input = document.querySelector('.input-div input'),
+      serverMessage = document.querySelector('.server-message'),
+      savedImages = JSON.parse('<%-JSON.stringify(images)%>'),
+      deleteImages = [];
 
     // SAVED IMAGES
-    if(savedImages) displaySavedImages();
+    if (savedImages) displaySavedImages();
 
-    function displaySavedImages(){
+    function displaySavedImages() {
       let images = "";
-        savedImages.forEach((image, index) => {
-          images += `<div class="image">
+      savedImages.forEach((image, index) => {
+        images += `<div class="image">
                       <img src="https://new-image-upload-backend.onrender.com/uploads/${image}" alt="image">
                       <span onclick="deleteSavedImage(${index})">&times;</span>
                     </div>`;
-        })
+      })
       savedDiv.innerHTML = images;
     }
 
@@ -119,20 +123,20 @@
           "Accept": "application/json, text/plain, */*",
           "Content-type": "application/json"
         },
-        body: JSON.stringify({deleteImages})
+        body: JSON.stringify({ deleteImages })
       })
 
-      .then(response => {
-        if (response.status !== 200) throw Error(response.statusText)
-        deleteImages = []
-        serverMessage.innerHTML = response.statusText
-        serverMessage.style.cssText = "background-color: #d4edda; color:#1b5e20"
-      })
+        .then(response => {
+          if (response.status !== 200) throw Error(response.statusText)
+          deleteImages = []
+          serverMessage.innerHTML = response.statusText
+          serverMessage.style.cssText = "background-color: #d4edda; color:#1b5e20"
+        })
 
-      .catch(error => {
-        serverMessage.innerHTML = error
-        serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
-      });
+        .catch(error => {
+          serverMessage.innerHTML = error
+          serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
+        });
 
     }
 
@@ -147,8 +151,8 @@
                   </div>`;
       })
       queuedDiv.innerHTML = images;
-      document.getElementByClassName("upload-symbol").style.display = "none";
-      document.getElementByClassName("browse").style.display = "none";
+      document.querySelector(".upload-symbol").style.display = "none";
+      document.querySelector(".browse").style.display = "none";
     }
 
     function deleteQueuedImage(index) {
@@ -157,14 +161,14 @@
     }
 
     input.addEventListener("change", () => {
-      
+
       const files = input.files;
       for (let i = 0; i < files.length; i++) {
         queuedImagesArray.push(files[i])
       }
       queuedForm.reset();
       displayQueuedImages();
-      
+
     });
 
     inputDiv.addEventListener("drop", (e) => {
@@ -172,7 +176,7 @@
       const files = e.dataTransfer.files
       for (let i = 0; i < files.length; i++) {
         if (!files[i].type.match("image")) continue; // only photos
-        
+
         if (queuedImagesArray.every(image => image.name !== files[i].name))
           queuedImagesArray.push(files[i])
       }
@@ -195,16 +199,16 @@
         method: "POST",
         body: formData
       })
-        
-      .then(response => {
-        if(response.status !== 200) throw Error(response.statusText)
-        location.reload() 
-      })
 
-      .catch( error => { 
-        serverMessage.innerHTML = error
-        serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
-      });
+        .then(response => {
+          if (response.status !== 200) throw Error(response.statusText)
+          location.reload()
+        })
+
+        .catch(error => {
+          serverMessage.innerHTML = error
+          serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
+        });
     }
 
 
@@ -230,9 +234,10 @@
       }
     };
 
-  document.getElementById("hamburger").addEventListener("click", navMenuShow);
+    document.getElementById("hamburger").addEventListener("click", navMenuShow);
 
   </script>
-  
+
 </body>
+
 </html>
