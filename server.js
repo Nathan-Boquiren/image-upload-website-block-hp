@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 });
 
 function checkFileType(file, cb) {
-  const filetypes = /jpeg|png|jpg|gif/;
+  const filetypes = /jpeg|png|jpg|gif|heic/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
 
@@ -73,7 +73,7 @@ app.post("/upload", (req, res) => {
       res.statusMessage =
         err === "Please upload images only"
           ? err
-          : "Photo exceeds limit of 1MB";
+          : "Photo exceeds limit of 2MB";
       res.status(400).end();
     }
   });
