@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,16 +96,19 @@
       let images = "";
       savedImages.forEach((image, index) => {
         images += `<div class="image">
-                      <img src="https://new-image-upload-backend.onrender.com/uploads/${image}" alt="image">
+                      <img src="/image/${image.id}" alt="${image.name}" loading="lazy">
                       <span onclick="deleteSavedImage(${index})">&times;</span>
-                    </div>`;
-      })
+                   </div>`;
+      });
       savedDiv.innerHTML = images;
     }
 
     function deleteSavedImage(index) {
-      deleteImages.push(savedImages[index])
+      // Add the image ID to the deleteImages array
+      deleteImages.push(savedImages[index].id);
+      // Remove the image from the savedImages array
       savedImages.splice(index, 1);
+      // Update the displayed images
       displaySavedImages();
     }
 
@@ -114,28 +118,28 @@
     });
 
     function deleteImagesFromServer() {
-
-      fetch("delete", {
-        method: "PUT",
+      // Make a PUT request to the server with the deleteImageIds in the body
+      fetch('/delete', {
+        method: 'PUT',
         headers: {
-          "Accept": "application/json, text/plain, */*",
-          "Content-type": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ deleteImages })
+        body: JSON.stringify({
+          deleteImageIds: deleteImages, // Send the array of image IDs to delete
+        }),
       })
-
         .then(response => {
-          if (response.status !== 200) throw Error(response.statusText)
-          deleteImages = []
-          serverMessage.innerHTML = response.statusText
-          serverMessage.style.cssText = "background-color: #d4edda; color:#1b5e20"
+          if (response.ok) {
+            alert('Images successfully deleted');
+            deleteImages = []; // Clear the deleteImages array after successful deletion
+          } else {
+            alert('Failed to delete images');
+          }
         })
-
         .catch(error => {
-          serverMessage.innerHTML = error
-          serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
+          console.error('Error:', error);
+          alert('An error occurred while deleting the images');
         });
-
     }
 
     // QUEUED IMAGES
