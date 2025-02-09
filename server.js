@@ -11,9 +11,12 @@ const { google } = require("googleapis");
 const KEY_PATH = path.join(__dirname, "api-key.json");
 
 // authenticate
+
+const keyFile = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON); // ✅ Read from env variable
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: KEY_PATH,
-  scopes: ["https://www.googleapis.com/auth/drive"],
+  credentials: keyFile,
+  scopes: ["https://www.googleapis.com/auth/drive.readonly"],
 });
 
 const drive = google.drive({ version: "v3", auth });
