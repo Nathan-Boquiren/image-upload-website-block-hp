@@ -9,8 +9,7 @@ const unlinkFile = util.promisify(fs.unlink);
 const { google } = require("googleapis");
 const KEY_PATH = path.join(__dirname, "api-key.json");
 
-// authenticate
-const keyFile = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON); // ✅ Read from env variable
+const keyFile = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON);
 const auth = new google.auth.GoogleAuth({
   credentials: keyFile,
   scopes: ["https://www.googleapis.com/auth/drive.file"],
@@ -60,20 +59,17 @@ app.use(express.static("views"));
 
 app.get("/", async (req, res) => {
   try {
-    // Fetch images from Google Drive
     const response = await drive.files.list({
       q: "'1ZPREpiTanEQz6ZRcmT9NCWhhw6eo2Huv' in parents and mimeType contains 'image/'",
       fields: "files(id, name)",
     });
 
-    // Map the data to include the file ID and public URL
     const images = response.data.files.map((file) => ({
       id: file.id,
       name: file.name,
-      url: `https://drive.google.com/uc?export=view&id=${file.id}`, // Public URL of the image
+      url: `https://drive.google.com/uc?export=view&id=${file.id}`,
     }));
 
-    // Render the 'index' template and send the images data
     res.render("index", { images: images });
   } catch (error) {
     console.error("Error fetching images from Google Drive:", error);
@@ -89,7 +85,7 @@ app.get("/image/:id", async (req, res) => {
       { responseType: "stream" }
     );
 
-    res.setHeader("Content-Type", "image/jpg"); // Adjust based on your images' format
+    res.setHeader("Content-Type", "image/jpg");
     response.data.pipe(res);
   } catch (error) {
     console.error("Error fetching image:", error);
@@ -105,7 +101,6 @@ app.post("/upload", async (req, res) => {
         const filePath = file.path;
         const fileName = file.originalname;
 
-        // Upload the file to Google Drive
         const response = await drive.files.create({
           requestBody: {
             name: fileName,
@@ -151,7 +146,7 @@ app.post("/upload", async (req, res) => {
 });
 
 app.put("/delete", async (req, res) => {
-  const deleteImageIds = req.body.deleteImageIds; // Expecting Google Drive file IDs
+  const deleteImageIds = req.body.deleteImageIds;
 
   if (!deleteImageIds || deleteImageIds.length === 0) {
     res.statusMessage = "No images to delete";
@@ -176,14 +171,14 @@ app.put("/delete", async (req, res) => {
 app.get("/gallery", async (req, res) => {
   try {
     const response = await drive.files.list({
-      q: "'1ZPREpiTanEQz6ZRcmT9NCWhhw6eo2Huv' in parents and mimeType contains 'image/'", // Get only images
+      q: "'1ZPREpiTanEQz6ZRcmT9NCWhhw6eo2Huv' in parents and mimeType contains 'image/'",
       fields: "files(id, name)",
     });
 
     const images = response.data.files.map((file) => ({
       id: file.id,
       name: file.name,
-      url: `https://drive.google.com/uc?export=view&id=${file.id}`, // Publicly accessible URL
+      url: `https://drive.google.com/uc?export=view&id=${file.id}`,
     }));
 
     res.render("gallery", { images: images });

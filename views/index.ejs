@@ -106,11 +106,8 @@
     }
 
     function deleteSavedImage(index) {
-      // Add the image ID to the deleteImages array
       deleteImages.push(savedImages[index].id);
-      // Remove the image from the savedImages array
       savedImages.splice(index, 1);
-      // Update the displayed images
       displaySavedImages();
     }
 
@@ -120,20 +117,19 @@
     });
 
     function deleteImagesFromServer() {
-      // Make a PUT request to the server with the deleteImageIds in the body
       fetch('/delete', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          deleteImageIds: deleteImages, // Send the array of image IDs to delete
+          deleteImageIds: deleteImages,
         }),
       })
         .then(response => {
           if (response.ok) {
             alert('Images successfully deleted');
-            deleteImages = []; // Clear the deleteImages array after successful deletion
+            deleteImages = [];
           } else {
             alert('Failed to delete images');
           }
@@ -165,7 +161,6 @@
     }
 
     input.addEventListener("change", () => {
-
       const files = input.files;
       for (let i = 0; i < files.length; i++) {
         queuedImagesArray.push(files[i])
@@ -194,21 +189,17 @@
 
     function sendQueuedImagesToServer() {
       const formData = new FormData(queuedForm);
-
       queuedImagesArray.forEach((image, index) => {
         formData.append(`file[${index}]`, image)
       })
-
       fetch("upload", {
         method: "POST",
         body: formData
       })
-
         .then(response => {
           if (response.status !== 200) throw Error(response.statusText)
           location.reload()
         })
-
         .catch(error => {
           serverMessage.innerHTML = error
           serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
@@ -226,7 +217,6 @@
 
       if (navMenu.style.left === "0px") {
         navMenu.style.left = "-180px";
-        // hamburger animation
         lineOne.style.transform = "rotate(0deg)";
         lineTwo.style.transform = "scale(1)";
         lineThree.style.transform = "rotate(0deg)";
