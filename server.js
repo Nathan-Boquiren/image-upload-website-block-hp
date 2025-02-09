@@ -7,18 +7,14 @@ const unlinkFile = util.promisify(fs.unlink);
 
 // Google api
 const { google } = require("googleapis");
-
 const KEY_PATH = path.join(__dirname, "api-key.json");
 
 // authenticate
-
 const keyFile = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON); // ✅ Read from env variable
-
 const auth = new google.auth.GoogleAuth({
   credentials: keyFile,
-  scopes: ["https://www.googleapis.com/auth/drive.readonly"],
+  scopes: ["https://www.googleapis.com/auth/drive.file"],
 });
-
 const drive = google.drive({ version: "v3", auth });
 
 const storage = multer.diskStorage({
@@ -58,13 +54,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// For setting template engine
 app.set("view engine", "ejs");
-
-// Access
 app.use(express.static("public"));
-
-// Access views folder for images/favicon
 app.use(express.static("views"));
 
 app.get("/", async (req, res) => {
@@ -139,7 +130,6 @@ app.post("/upload", async (req, res) => {
 
         console.log("Permission response:", permissionResponse.data);
 
-        // Remove the file from the local server after upload
         await unlinkFile(filePath);
 
         res.status(200).json({ fileId: fileId });
