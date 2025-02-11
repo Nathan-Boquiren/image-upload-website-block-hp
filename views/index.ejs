@@ -189,15 +189,9 @@
 
     function sendQueuedImagesToServer() {
       const formData = new FormData(queuedForm);
-      // queuedImagesArray.forEach((image, index) => {
-      //   formData.append(`file[${index}]`, image)
-      // })
-      // 
       queuedImagesArray.forEach((image) => {
         formData.append("file", image)
       })
-      // 
-      // 
       fetch("upload", {
         method: "POST",
         body: formData
