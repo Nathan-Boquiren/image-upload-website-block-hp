@@ -16,6 +16,11 @@ const auth = new google.auth.GoogleAuth({
 });
 const drive = google.drive({ version: "v3", auth });
 
+const uploadDir = "./public/uploads/";
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/uploads/");
@@ -40,11 +45,12 @@ function checkFileType(file, cb) {
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 2000000 },
+  // limits: { fileSize: 2000000 },
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
-}).any();
+}).array("file", 10);
 
 const port = process.env.PORT || 3000;
 
@@ -95,6 +101,7 @@ app.get("/image/:id", async (req, res) => {
 
 app.post("/upload", async (req, res) => {
   upload(req, res, async (err) => {
+    console.log("Uploaded files:", req.files);
     if (!err && req.files.length > 0) {
       try {
         const file = req.files[0];
