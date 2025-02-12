@@ -93,8 +93,9 @@ header {
 
 button {
   margin: 20px 0;
-  padding: 10px;
+  padding: 0 10px;
   width: 100%;
+  height: 45px;
   color: white;
   font-family: inherit;
   border-radius: 10px;
@@ -286,6 +287,13 @@ button {
 .saved-div .span--hidden,
 .queued-div .span--hidden {
   visibility: hidden;
+}
+
+
+#upload-img {
+  height: 40px;
+  transform: rotateY(180deg);
+  filter: brightness(500%);
 }
 
 /* ================   GALLERY  PAGE   ================*/
