@@ -289,9 +289,14 @@ button {
   visibility: hidden;
 }
 
+#upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 #loading-img {
-  height: 40px;
+  height: 38px;
   filter: brightness(0) invert(1);
 }
 
