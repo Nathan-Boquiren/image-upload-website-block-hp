@@ -290,10 +290,9 @@ button {
 }
 
 
-#upload-img {
+#loading-img {
   height: 40px;
-  transform: rotateY(180deg);
-  filter: brightness(500%);
+  filter: brightness(0) invert(1);
 }
 
 /* ================   GALLERY  PAGE   ================*/
